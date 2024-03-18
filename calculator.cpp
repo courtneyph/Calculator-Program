@@ -9,11 +9,19 @@
 char const number = '8';    // a floating-point number
 char const quit = 'q';      // an exit command
 char const print = ';';     // a print command
+char const name =  'c';     // a variable name
+char cont assign = '=';     // assignment command
+
+std::map<std::string, double> predefinedVals = {
+        {"pi", 3.14159},
+        {"e", 2.71828}
+};
 
 class token
 {
     char kind_;       // what kind of token
     double value_;    // for numbers: a value
+    std::string name_; // for variables: a name
 
 public:
     // constructors
@@ -40,6 +48,10 @@ public:
     double value() const
     {
         return value_;
+    }
+    std::string name() const
+    {
+        return name_;
     }
 };
 
@@ -121,7 +133,19 @@ token token_stream::get()    // read a token from the token_stream
         return token(val);
     }
     default:
-        
+        if (isalpha(ch))
+            {
+                if (ch == 'e' || ch == 'q')
+                    throw std::runtime_error("Cannot assign to 'e' or 'q'");
+
+                std::string s;
+                s += ch;
+                while (std::cin.get(ch) && (isalpha(ch) || isdigit(ch) || ch == '_')){
+                    s += ch;
+                }
+                std::cin.putback(ch);
+                return token(name, s); // return variable name
+            }
         throw std::runtime_error("Bad token");
     }
 }
@@ -166,6 +190,16 @@ double primary()    // Number or ‘(‘ Expression ‘)’
         return t.value();    // return the number’s value
     case '-':       // negative values
         return -primary();
+    case name: {
+        token next = ts.get();
+        if (next.kind() == assign) {
+            double right = expression();
+            predefinedVals[t.name()] = right;
+            return right;
+        } else {
+            ts.putback(next);
+            return predefinedVals[t.name()];
+            }
     default:
         throw std::runtime_error("primary expected");
     }
@@ -269,7 +303,7 @@ int main()
     {
         calculate();
         return 0;
-    }
+    }   
     catch (...)
     {
         // other errors (don't try to recover)
