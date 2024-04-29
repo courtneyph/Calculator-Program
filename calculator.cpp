@@ -204,6 +204,7 @@ double primary()    // Number or ‘(‘ Expression ‘)’
         throw std::runtime_error("primary expected");
     }
 }
+}
 
 // exactly like expression(), but for * and /
 double term()
