@@ -5,8 +5,7 @@
 #include <map>
 #include <sstream>
 #include <cassert>
-#include <windows.h>
-#include <thread>
+
 
 using namespace std;
 
