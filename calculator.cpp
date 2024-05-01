@@ -133,7 +133,7 @@ double primary(token_stream& ts) {
         {
             token next = ts.get();
             if (next.kind() == assign) {
-                double value = expression(ts); // Handle the right side of the assignment
+                double value = expression(ts); 
                 predefinedVals[t.name()] = value;
                 return value;
             } else {
