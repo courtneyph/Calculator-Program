@@ -1,0 +1,10 @@
+^C:\USERS\COURT\DESKTOP\CSC CODE\CSC 3380\CALCULATOR PROGRAM\CALCULATOR-PROGRAM\BUILD\CMAKEFILES\B3777AFC2E9054051756F1E18B202AC0\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/court/Desktop/CSC Code/CSC 3380/calculator program/Calculator-Program" "-BC:/Users/court/Desktop/CSC Code/CSC 3380/calculator program/Calculator-Program/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/court/Desktop/CSC Code/CSC 3380/calculator program/Calculator-Program/build/spring2024-csc3380-lecture7.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

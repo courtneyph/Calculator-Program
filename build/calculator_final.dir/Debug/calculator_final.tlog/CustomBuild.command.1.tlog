@@ -1,0 +1,10 @@
+^C:\USERS\COURT\DESKTOP\CSC CODE\CSC 3380\CALCULATOR PROGRAM\CALCULATOR-PROGRAM\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/court/Desktop/CSC Code/CSC 3380/calculator program/Calculator-Program" "-BC:/Users/court/Desktop/CSC Code/CSC 3380/calculator program/Calculator-Program/build" --check-stamp-file "C:/Users/court/Desktop/CSC Code/CSC 3380/calculator program/Calculator-Program/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
